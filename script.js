@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoader', function() {
             taskList.appendChild("li");
 
             taskInput.value = "";
+        } else {
+            alert ("Please enter a task");
         }
     }
 
