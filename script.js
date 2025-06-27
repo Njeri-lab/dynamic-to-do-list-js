@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoader', function() {
-    // const storedTasks = localStorage.getItem('tasks');
 
-    // if (storedTasks) {
-    //     const taskArray = JSON.parse(storedTasks);
+    let tasks = []; //creates an empty array to hold the list of tasks in JS memory, which can later be saved to or loaded from Local storage
 
-    //     taskArray.forEach(taskText => {
-    //         renderTask(taskText);
-    //     })
-    // }
+    function loadTasks () {
+        const storedTasks = localStorage.getItem('tasks');
+        if (storedTasks) {
+            tasks = JSON.parse(storedTasks);
+
+            tasks.forEach(taskText => {
+                createTaskElement(taskText);
+            });
+        }
+    }
 
 
     const addButton = document.getElementById('add-task-btn');
+
     const taskInput = document.getElementById('task-input');
+
     const taskList = document.getElementById('task-list');
 
     function addTask () {
@@ -25,7 +31,7 @@ document.addEventListener('DOMContentLoader', function() {
             removeBtn.classList.add("remove-btn");
 
             removeBtn.onclick = function () {
-                taskList.remove(li);
+                li.remove();
             }; 
 
             li.appendChild(removeBtn);
@@ -38,7 +44,6 @@ document.addEventListener('DOMContentLoader', function() {
     }
 
     addButton.addEventListener("click", addTask);
-    
     taskInput.addEventListener("keypress", function (event){
         if (event.key === 'Enter') {
             addTask();
